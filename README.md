@@ -1,6 +1,6 @@
-# 🗺️ Tiny-Trail
+# 🔗 Tiny-Trail
 
-A full-stack web application for exploring and sharing travel experiences with interactive trail mapping and community features.
+A modern, full-stack URL shortener web application built with React and Java. Create short, memorable links and track their performance with detailed analytics.
 
 ## 📋 Table of Contents
 - [Overview](#overview)
@@ -10,32 +10,44 @@ A full-stack web application for exploring and sharing travel experiences with i
 - [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license)
+- [API Documentation](#api-documentation)
 
 ## 🌟 Overview
 
-Tiny-Trail is a modern web application that allows users to discover, plan, and share their travel experiences. Whether you're a hiking enthusiast, city explorer, or adventure seeker, Tiny-Trail helps you document your journeys and connect with fellow travelers.
+Tiny-Trail is a powerful URL shortening service that transforms long, unwieldy URLs into short, manageable links. With advanced analytics, custom aliases, and a user-friendly interface, it's perfect for marketers, developers, and anyone who needs to share links efficiently.
 
 ## ✨ Features
 
-- 🗺️ **Interactive Trail Mapping** - Visualize and explore trails with detailed maps
+- 🔗 **URL Shortening** - Convert long URLs into short, shareable links
+- 📊 **Analytics Dashboard** - Track clicks, geographic data, and referrer information
+- 🎯 **Custom Aliases** - Create branded, memorable short URLs
+- 👥 **User Management** - Secure user accounts with personal link management
 - 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
-- 🔐 **User Authentication** - Secure user accounts and personalized experiences
-- 📊 **Trail Analytics** - Track your progress and view statistics
+- ⚡ **Fast Redirects** - Lightning-fast link resolution and redirection
+- 📈 **Real-time Statistics** - Live click tracking and performance metrics
+- 🌐 **API Access** - RESTful API for programmatic URL shortening
+- 🎨 **Modern UI** - Clean, intuitive interface built with React
 
 ## 🛠️ Tech Stack
 
 ### Frontend (65.7% JavaScript)
-- **React** - Modern UI library for building interactive interfaces
+- **React** - Modern UI library for interactive user interfaces
 - **Vite** - Fast build tool and development server
 - **JavaScript/ES6+** - Core programming language
+- **CSS3** - Responsive styling and animations
+- **Chart.js** - Data visualization for analytics
 
 ### Backend (33.4% Java)
 - **Java** - Robust backend development
 - **Spring Boot** - Enterprise-grade application framework
-- **RESTful APIs** - Clean and scalable API architecture
+- **Spring Security** - Authentication and authorization
+- **JPA/Hibernate** - Database ORM
+- **RESTful APIs** - Clean API architecture
+- **MySQL/PostgreSQL** - Database storage
 
 ### Additional Technologies
+- **Redis** - Caching for improved performance
+- **Docker** - Containerization
 - **Git** - Version control
 - **ESLint** - Code quality and consistency
 
@@ -44,9 +56,12 @@ Tiny-Trail is a modern web application that allows users to discover, plan, and 
 ### Prerequisites
 
 Before running this project, make sure you have the following installed:
+- **Node.js** (v16 or higher)
 - **npm** or **yarn**
 - **Java Development Kit (JDK)** (v11 or higher)
-- **Maven** or **Gradle** (for Java backend)
+- **Maven** or **Gradle**
+- **MySQL** or **PostgreSQL**
+- **Redis** (optional, for caching)
 
 ### Installation
 
@@ -65,10 +80,13 @@ Before running this project, make sure you have the following installed:
 3. **Setup Backend**
    ```bash
    cd ../backend
-   # Install Java dependencies (adjust based on your build tool)
    mvn install
-   # or
-   gradle build
+   ```
+
+4. **Configure Database**
+   ```bash
+   # Create database and update application.properties
+   # Set your database credentials and connection details
    ```
 
 ## 📁 Project Structure
@@ -76,15 +94,26 @@ Before running this project, make sure you have the following installed:
 ```
 Tiny-Trail/
 ├── Tiny-Trail-Frotend/          # React frontend application
-│   ├── src/                     # Source code
-│   ├── public/                  # Static assets
-│   ├── package.json             # Frontend dependencies
-│   └── vite.config.js           # Vite configuration
-├── backend/                     # Java backend application
-│   ├── src/                     # Java source code
-│   └── pom.xml                  # Maven configuration
-├── README.md                    # Project documentation
-└── .gitignore                   # Git ignore rules
+│   ├── src/
+│   │   ├── components/          # Reusable UI components
+│   │   ├── pages/              # Main application pages
+│   │   ├── services/           # API service calls
+│   │   ├── utils/              # Utility functions
+│   │   └── styles/             # CSS and styling
+│   ├── public/                 # Static assets
+│   ├── package.json            # Frontend dependencies
+│   └── vite.config.js          # Vite configuration
+├── backend/                    # Java backend application
+│   ├── src/main/java/          # Java source code
+│   │   ├── controller/         # REST API controllers
+│   │   ├── service/            # Business logic
+│   │   ├── repository/         # Data access layer
+│   │   ├── model/              # Entity models
+│   │   └── config/             # Configuration classes
+│   ├── src/main/resources/     # Configuration files
+│   └── pom.xml                 # Maven dependencies
+├── README.md                   # Project documentation
+└── .gitignore                  # Git ignore rules
 ```
 
 ## 💻 Usage
@@ -95,8 +124,6 @@ Tiny-Trail/
    ```bash
    cd backend
    mvn spring-boot:run
-   # or
-   gradle bootRun
    ```
 
 2. **Start the frontend development server:**
@@ -105,21 +132,40 @@ Tiny-Trail/
    npm run dev
    ```
 
-3. **Open your browser and navigate to:**
-   - Frontend: `http://localhost:5173` (default Vite port)
-   - Backend API: `http://localhost:8080` (default Spring Boot port)
+3. **Access the application:**
+   - Frontend: `http://localhost:5173`
+   - Backend API: `http://localhost:8080`
 
-### Production Build
+### Basic Usage
 
-```bash
-# Build frontend for production
-cd Tiny-Trail-Frotend
-npm run build
+1. **Shorten a URL:** Enter your long URL and get an instant short link
+2. **Custom Alias:** Create branded short URLs with custom aliases
+3. **Track Analytics:** View detailed statistics for your links
+4. **Manage Links:** Organize and manage all your shortened URLs
+5. **API Integration:** Use the REST API for programmatic access
 
-# Build backend for production
-cd ../backend
-mvn clean package
+## 📚 API Documentation
 
-## 📄 License
+The backend provides comprehensive RESTful APIs:
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+### Core Endpoints
+- `POST /api/shorten` - Create a short URL
+- `GET /api/{shortCode}` - Redirect to original URL
+- `GET /api/analytics/{shortCode}` - Get link analytics
+- `GET /api/user/links` - Get user's links
+- `DELETE /api/links/{id}` - Delete a link
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `POST /api/auth/logout` - User logout
+
+
+### Development Guidelines
+- Follow the existing code style
+- Write meaningful commit messages
+- Add tests for new features
+- Update documentation as needed
+- Ensure all tests pass before submitting
+
+*Making long URLs tiny, one link at a time! 🔗✨*
