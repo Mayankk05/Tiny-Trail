@@ -48,11 +48,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-//    @Override
-//    protected boolean shouldNotFilter(HttpServletRequest request) {
-//        String path = request.getServletPath();
-//        // Skip JWT filter for login and register endpoints
-//        return path.startsWith("/api/auth/");
-//    }
 
 }
